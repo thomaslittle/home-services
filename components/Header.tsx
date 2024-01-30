@@ -1,9 +1,24 @@
-import React from "react";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import ResultsCount from "@/components/ResultsCount";
+
+interface HeaderProps {
+  isLoading: boolean;
+  isLoadingServices: boolean;
+  selectedServices: string[];
+  handleSortChange: (value: string) => void;
+  handleServiceChange: (selected: string | string[]) => void;
+  handleDistanceChange: (value: string) => void;
+  selectedDistance: string;
+  sortedDataLength: number;
+  allServices: string[];
+}
 
 const Header: React.FC<HeaderProps> = ({ isLoadingServices, selectedServices, handleSortChange, handleServiceChange, selectedDistance, handleDistanceChange, sortedDataLength, allServices }) => {
+  const formattedSortedDataLength = sortedDataLength.toString();
+
   return (
     <header className="mb-6 justify-end space-y-2 md:flex md:space-x-4 md:space-y-0">
+      {/* rating */}
       <Select onValueChange={(value) => handleSortChange(value)}>
         <SelectTrigger className="flex w-full items-center md:w-auto">
           <SelectValue placeholder="STAR RATING" />
@@ -19,16 +34,12 @@ const Header: React.FC<HeaderProps> = ({ isLoadingServices, selectedServices, ha
           </SelectGroup>
         </SelectContent>
       </Select>
+      {/*services */}
       <Select disabled={isLoadingServices} onValueChange={(value) => handleServiceChange(value)}>
         <SelectTrigger className="flex w-full items-center justify-between md:w-auto">
           <SelectValue placeholder="SERVICES OFFERED" />
-          {selectedServices.length > 0 && (
-            <div className="ml-4 flex-1 text-right font-serif text-xs font-normal">
-              (<span className="font-bold">{sortedDataLength}</span>)
-            </div>
-          )}
+          {selectedServices.length > 0 && <ResultsCount text={formattedSortedDataLength} />}
         </SelectTrigger>
-
         {!isLoadingServices && (
           <SelectContent>
             <SelectGroup>
@@ -42,16 +53,11 @@ const Header: React.FC<HeaderProps> = ({ isLoadingServices, selectedServices, ha
           </SelectContent>
         )}
       </Select>
-
+      {/* distance */}
       <Select onValueChange={(value) => handleDistanceChange(value)}>
         <SelectTrigger className="flex w-full items-center justify-between md:w-auto">
           <SelectValue placeholder="DISTANCE" />
-
-          {selectedDistance && (
-            <div className="ml-4 flex-1 text-right font-serif text-xs font-normal">
-              (<span className="font-bold">{sortedDataLength}</span>)
-            </div>
-          )}
+          {selectedDistance && <ResultsCount text={formattedSortedDataLength} />}
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

@@ -21,22 +21,22 @@ export const sortCompaniesByRating = (companies: any, sortBy: string) => {
 };
 
 // mimic user's location as if they live in Tucson, AZ for demo purposes - replace with geolocation
-export const userLocation = {
+export const currentLocation = {
   latitude: 32.17144,
   longitude: -110.95468,
 };
 
-export const filterCompaniesByDistance = (companies: any[], distanceInMiles: number, userLocation: { latitude: any; longitude: any }) => {
+export const filterCompaniesByDistance = (companies: any[], distanceInMiles: number, currentLocation: { latitude: any; longitude: any }) => {
   return companies.filter((company) => {
-    const distance = calculateDistance(userLocation.latitude, userLocation.longitude, company.latitude, company.longitude);
+    const distance = calculateDistance(currentLocation.latitude, currentLocation.longitude, company.latitude, company.longitude);
     return distance <= distanceInMiles;
   });
 };
 
-export const sortCompaniesByDistance = (companies: any[], userLocation: { latitude: any; longitude: any }) => {
+export const sortCompaniesByDistance = (companies: any[], currentLocation: { latitude: any; longitude: any }) => {
   return companies.sort((a, b) => {
-    const distanceA = calculateDistance(userLocation.latitude, userLocation.longitude, a.latitude, a.longitude);
-    const distanceB = calculateDistance(userLocation.latitude, userLocation.longitude, b.latitude, b.longitude);
+    const distanceA = calculateDistance(currentLocation.latitude, currentLocation.longitude, a.latitude, a.longitude);
+    const distanceB = calculateDistance(currentLocation.latitude, currentLocation.longitude, b.latitude, b.longitude);
     return distanceA - distanceB;
   });
 };
@@ -64,16 +64,16 @@ export const performServiceChange = async (selected: string | string[], setSelec
 export const updateSortedData = async (
   value: string,
   data: { companies: any[] },
-  userLocation: { latitude: any; longitude: any },
+  currentLocation: { latitude: any; longitude: any },
   setSelectedDistance: { (value: SetStateAction<string>): void; (arg0: string): void },
   setSortedData: { (value: SetStateAction<Company[]>): void; (arg0: Company[]): void },
   setIsLoading: { (value: SetStateAction<boolean>): void; (arg0: boolean): void },
 ) => {
   const distanceInMiles = value === "ALL" ? Number.MAX_SAFE_INTEGER : parseInt(value);
-  const filteredCompanies = filterCompaniesByDistance(data.companies, distanceInMiles, userLocation);
+  const filteredCompanies = filterCompaniesByDistance(data.companies, distanceInMiles, currentLocation);
   setIsLoading(true);
   await new Promise((resolve) => setTimeout(resolve, 500));
-  setSortedData(sortCompaniesByDistance(filteredCompanies, userLocation));
+  setSortedData(sortCompaniesByDistance(filteredCompanies, currentLocation));
   setSelectedDistance(value);
   setIsLoading(false);
 };

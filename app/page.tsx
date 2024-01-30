@@ -4,8 +4,7 @@ import { useState, useEffect } from "react";
 import Loader from "@/components/Loader";
 import Header from "@/components/Header";
 import CompanyCard from "@/components/CompanyCard";
-import { userLocation } from "@/lib/sorting";
-import { performSortByRating, performServiceChange, updateSortedData } from "@/lib/sorting";
+import { performSortByRating, performServiceChange, updateSortedData, currentLocation } from "@/lib/sorting";
 import useCompanyData from "@/hooks/useCompanyData";
 import { useServices } from "@/hooks/useServices";
 
@@ -36,7 +35,7 @@ export default function Home() {
   };
 
   const handleDistanceChange = (value: string) => {
-    updateSortedData(value, data, userLocation, setSelectedDistance, setSortedData, setIsLoading);
+    updateSortedData(value, data, currentLocation, setSelectedDistance, setSortedData, setIsLoading);
   };
 
   // services filtering logic
@@ -68,7 +67,7 @@ export default function Home() {
         {isLoading && <Loader />}
         {filteredData.length <= 0 && <h1 className="mt-20 flex justify-center text-2xl font-bold">{filteredData.length} Results Found.</h1>}
         {filteredData.map((entry: Company, index: number) => (
-          <CompanyCard key={index} company={entry} slug={entry.slug} selectedServices={selectedServices} selectedDistance={selectedDistance} userLocation={userLocation} filteredData={filteredData.length} />
+          <CompanyCard key={index} company={entry} slug={entry.slug} selectedServices={selectedServices} selectedDistance={selectedDistance} currentLocation={currentLocation} />
         ))}
       </div>
     </main>

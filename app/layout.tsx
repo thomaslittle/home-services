@@ -4,17 +4,17 @@ import localFont from "next/font/local";
 const Chronica = localFont({
   src: [
     {
-      path: "./fonts/ChronicaPro-Medium.woff2",
+      path: "../fonts/ChronicaPro-Medium.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "./fonts/ChronicaPro-Bold.woff2",
+      path: "../fonts/ChronicaPro-Bold.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "./fonts/ChronicaPro-ExtraBold.woff2",
+      path: "..//fonts/ChronicaPro-ExtraBold.woff2",
       weight: "700",
       style: "normal",
     },
