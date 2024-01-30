@@ -66,7 +66,7 @@ export default function Home() {
           allServices={allServices}
         />
         {isLoading && <Loader />}
-        <h1 className="mt-20 flex justify-center text-2xl font-bold">{filteredData.length} Results Found.&rdquo;</h1>
+        {filteredData.length <= 0 && <h1 className="mt-20 flex justify-center text-2xl font-bold">{filteredData.length} Results Found.</h1>}
         {filteredData.map((entry: Company, index: number) => (
           <CompanyCard key={index} company={entry} slug={entry.slug} selectedServices={selectedServices} selectedDistance={selectedDistance} userLocation={userLocation} filteredData={filteredData.length} />
         ))}
