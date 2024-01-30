@@ -7,7 +7,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
-const CompanyCard = ({ company, slug, selectedServices, selectedDistance, userLocation }) => {
+const CompanyCard: React.FC<CompanyCardProps> = ({ company, slug, selectedServices, selectedDistance, userLocation, filteredData }) => {
   const { name, address, rating, services, featured, review_count, latitude, longitude } = company;
   return (
     <div className="relative">
@@ -73,7 +73,7 @@ const CompanyCard = ({ company, slug, selectedServices, selectedDistance, userLo
             <h3 className="font-semibold text-gray-500">EXPERIENCES</h3>
             <blockquote className="mt-4 bg-gray-100 p-4 font-serif italic text-gray-600">
               {/* reviews are hardcoded for now - no data available */}
-              <p>"We could not be happier with our HVAC system. Lorem ipsum dolor sit amet consectetur. Dictum fusce dignissim non in magna id. Elementum enim leo aliquam gravida phasellus eget nulla."</p>
+              <p>&quot;We could not be happier with our HVAC system. Lorem ipsum dolor sit amet consectetur. Dictum fusce dignissim non in magna id. Elementum enim leo aliquam gravida phasellus eget nulla.&quot;</p>
               <p className="mt-4 text-right">- Shane D.</p>
             </blockquote>
           </div>

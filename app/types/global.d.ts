@@ -11,6 +11,8 @@ declare global {
     };
     third_party_ratings: string[];
     review_count: number;
+    latitude: number;
+    longitude: number;
   }
   interface HeaderProps {
     isLoading: boolean;
@@ -22,6 +24,17 @@ declare global {
     selectedDistance: string;
     sortedDataLength: number;
     allServices: string[];
+  }
+  interface CompanyCardProps {
+    company: Company;
+    slug: string;
+    selectedServices: string[];
+    selectedDistance: string;
+    userLocation: {
+      latitude: number;
+      longitude: number;
+    };
+    filteredData: number;
   }
   interface StarRatingProps {
     rating: number;
